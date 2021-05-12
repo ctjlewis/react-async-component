@@ -1,5 +1,5 @@
 {
-  "name": "react-stateful-component",
+  "name": "stateful-component",
   "files": [
     "dist/**/*"
   ],
@@ -11,7 +11,7 @@
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "version": "0.2.0",
-  "description": "A component that asynchronously updates.",
+  "description": "A component that asynchronously updates its state.",
   "author": "C. Lewis",
   "license": "MIT",
   "private": false,
