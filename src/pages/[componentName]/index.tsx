@@ -30,16 +30,22 @@ const Centered: FC = ({ children }) => {
 }
 
 const ComponentDemo = () => {
-  type state = { count: number }
-  const initialState: state = {
+  type State = { count: number }
+  const initialState: State = {
     count: 0
   };
-  const updateState = async (state: AsyncState<state>) => {
-    state.count += 1
-    state.updateState(state);
-    return state.count < 4;
-  }
-  const displayCount = (state: state) => {
+  const updateState = async ({ count, updateState }: AsyncState<State>) => {
+    /**
+     * Trigger a state update.
+     */
+    count += 1;
+    updateState({ count });
+    /**
+     * Indicate whether or not to transition to the next state.
+     */
+    return count < 4;
+  };
+  const displayCount = (state: State) => {
     return (
       <h3>State.count: {state.count}</h3>
     );
