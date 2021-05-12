@@ -1,5 +1,4 @@
-import TestButton from './TestButton'
-import TestHeading from './TestHeading'
+import AsyncComponent from './AsyncComponent'
 
-export { TestButton, TestHeading }
-export default { TestButton, TestHeading }
+export { AsyncComponent }
+export default { AsyncComponent }

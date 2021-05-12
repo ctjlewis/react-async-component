@@ -1,2 +1,1 @@
-exports.TestButton = require('./TestButton/index.js')
-exports.TestHeading = require('./TestHeading/index.js')
+exports.AsyncComponent = require('./AsyncComponent/index.js')

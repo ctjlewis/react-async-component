@@ -1,17 +1,9 @@
 // import { useRouter } from 'next/router'
 import { FC } from 'react';
 
-// import {
-//   TestHeading as TestHeadingProd,
-//   TestButton as TestButtonProd
-// } from '../../..'
-
-import TestButtonProd from '../../../dist/TestButton';
-import TestHeadingProd from '../../../dist/TestHeading';
-
-import TestButtonDev from '../../components/TestButton';
-import TestHeadingDev from '../../components/TestHeading';
-
+import TestComponentDev from '../../components/AsyncComponent';
+import TestComponentProd from '../../../dist/AsyncComponent';
+import { AsyncState } from '../../components/AsyncComponent/types';
 
 const Row: FC = ({ children, ...props }) => {
   return (
@@ -38,36 +30,43 @@ const Centered: FC = ({ children }) => {
 }
 
 const ComponentDemo = () => {
+  type state = { count: number }
+  const initialState: state = {
+    count: 0
+  };
+  const updateState = async (state: AsyncState<state>) => {
+    state.count += 1
+    state.updateState(state);
+    return state.count < 4;
+  }
+  const displayCount = (state: state) => {
+    return (
+      <h3>State.count: {state.count}</h3>
+    );
+  }
+
   return (
     <Centered>
       <div className="w-full grid grid-cols-2 gap-8">
         <div className="grid grid-rows-2 gap-8 justify-items-center">
-          <h3>Development</h3>
-          <TestButtonDev />
-          <TestHeadingDev />
+          <h1>Development</h1>
+          <TestComponentDev
+            initialState={initialState}
+            updateState={updateState}
+            render={displayCount}
+          />
         </div>
         <div className="grid grid-rows-2 gap-8 justify-items-center">
-          <h3>Production</h3>
-          <TestButtonProd />
-          <TestHeadingProd />
+          <h1>Production</h1>
+          <TestComponentProd
+            initialState={initialState}
+            updateState={updateState}
+            render={displayCount}
+          />
         </div>
       </div>
     </Centered>
   );
-  // const router = useRouter();
-  // const componentName = router.query.componentName?.toString();
-  // if (componentName && componentName in Components) {
-  //   const Component = Components[componentName?.toString() ?? ''];
-  //   if (Component) {
-  //     return (
-  //       <Centered>
-  //         <Component />
-  //       </Centered>
-  //     );
-  //   }
-  // }
-
-  // return null;
 };
 
 export default ComponentDemo;

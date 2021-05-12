@@ -1,9 +1,6 @@
-/// <reference types="react" />
-import TestButton from './TestButton';
-import TestHeading from './TestHeading';
-export { TestButton, TestHeading };
+import AsyncComponent from './AsyncComponent';
+export { AsyncComponent };
 declare const _default: {
-    TestButton: () => JSX.Element;
-    TestHeading: () => JSX.Element;
+    AsyncComponent: typeof AsyncComponent;
 };
 export default _default;
