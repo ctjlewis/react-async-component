@@ -1,5 +1,6 @@
 {
   "name": "stateful-component",
+  "repository": "https://github.com/ctjlewis/stateful-component",
   "files": [
     "dist/**/*"
   ],
@@ -10,7 +11,7 @@
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "A component that asynchronously updates its state.",
   "author": "C. Lewis",
   "license": "MIT",
