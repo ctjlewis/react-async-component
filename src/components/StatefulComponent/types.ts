@@ -1,11 +1,5 @@
 import { Context, Dispatch, ReactNode, SetStateAction } from "react";
 
-export type AsyncComponentProps<T, K> = AsyncUpdate<T> & K;
-export type AsyncSetState<T> = Dispatch<SetStateAction<AsyncState<T>>>;
-export type UseAsyncContextHook<T> = () => AsyncState<T>;
-export type UpdatedState<T> = AsyncState<T>;
-export type UpdateStateHook<T> = (stateUpdates: Partial<T>) => void;
-
 /**
  * Metadata added to async component state.
  */
@@ -13,11 +7,14 @@ export interface AsyncStateMetadata<T> {
   loading: boolean
   updateState: UpdateStateHook<T>
 }
-/**
- * The `AsyncState` type simply adds the `loading: boolean` property to the
- * state.
- */
+
 export type AsyncState<T> = T & AsyncStateMetadata<T>;
+export type AsyncSetState<T> = Dispatch<SetStateAction<AsyncState<T>>>;
+export type StatefulComponentProps<T, K> = AsyncUpdate<T> & K;
+export type UseAsyncContextHook<T> = () => AsyncState<T>;
+export type UpdatedState<T> = AsyncState<T>;
+export type UpdateStateHook<T> = (stateUpdates: Partial<T>) => void;
+
 /**
  * The state update function `updateState` is called with the current state as
  * an argument in order to allow for conditional logic, and should resolve to an
@@ -51,13 +48,13 @@ export interface AsyncUpdate<T = any> {
  * `AsyncProvider` requires a `context` to read, and a `updateState` function
  * to generate a new state when the context changes.
  */
-export interface AsyncProviderProps<T> extends AsyncUpdate<T> {
+export interface StatefulProviderProps<T> extends AsyncUpdate<T> {
   context: Context<AsyncState<T>>;
 }
 /**
  * `AsyncConsumer` requires a `context` to read.
  */
-export interface AsyncConsumerProps<T> {
+export interface StatefulConsumerProps<T> {
   children: (value: T) => ReactNode
   context: Context<T>
 }

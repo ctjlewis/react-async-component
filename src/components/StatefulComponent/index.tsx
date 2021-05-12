@@ -2,14 +2,14 @@
  * @fileoverview
  * @see https://gist.github.com/bodokaiser/a6377f5cecf6344cd131dce97694a2ad
  *
- * The `AsyncComponent` is initialized with an `initialState` and refreshes
+ * The `StatefulComponent` is initialized with an `initialState` and refreshes
  * according to some `updateState` function until it reaches a final state.
  */
 
 import { Component } from "react";
-import { AsyncComponentProps, AsyncConsumerProps, AsyncProviderProps, AsyncState } from "./types";
+import { StatefulComponentProps, StatefulConsumerProps, StatefulProviderProps, AsyncState } from "./types";
 
-export default class AsyncComponent<T = any, K = {}> extends Component<AsyncComponentProps<T,K>> {
+export default class StatefulComponent<T = any, K = {}> extends Component<StatefulComponentProps<T,K>> {
   active = true;
   /**
    * Initialize the state to the initial state, loading: true, and set the
@@ -57,10 +57,10 @@ export default class AsyncComponent<T = any, K = {}> extends Component<AsyncComp
 /**
  * Consume the `context` from a Provider of that context up the render tree.
  */
- export const AsyncConsumer = <T,>({
+ export const StatefulConsumer = <T,>({
   children,
   context
-}: AsyncConsumerProps<T>) => (
+}: StatefulConsumerProps<T>) => (
   <context.Consumer>{children}</context.Consumer>
 );
 /**
@@ -68,7 +68,7 @@ export default class AsyncComponent<T = any, K = {}> extends Component<AsyncComp
  * it in the render tree, and re-renders when the `Context` changes, which is
  * detected automatically.
  */
-export class AsyncProvider<T> extends AsyncComponent<T, AsyncProviderProps<T>> {
+export class StatefulProvider<T> extends StatefulComponent<T, StatefulProviderProps<T>> {
   /**
    * Render the Provider and load it with the current state.
    */

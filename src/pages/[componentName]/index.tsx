@@ -1,9 +1,9 @@
 // import { useRouter } from 'next/router'
 import { FC } from 'react';
 
-import TestComponentDev from '../../components/AsyncComponent';
-import TestComponentProd from '../../../dist/AsyncComponent';
-import { AsyncState } from '../../components/AsyncComponent/types';
+import TestComponentDev from '../../components/StatefulComponent';
+import TestComponentProd from '../../../dist/StatefulComponent';
+import { AsyncState } from '../../components/StatefulComponent/types';
 
 const Row: FC = ({ children, ...props }) => {
   return (

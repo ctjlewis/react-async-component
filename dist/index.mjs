@@ -1,4 +1,4 @@
-import AsyncComponent from './AsyncComponent/index.js'
+import StatefulComponent from './StatefulComponent/index.js'
 
-export { AsyncComponent }
-export default { AsyncComponent }
+export { StatefulComponent }
+export default { StatefulComponent }

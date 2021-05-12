@@ -1,6 +1,6 @@
-import AsyncComponent from './AsyncComponent';
-export { AsyncComponent };
+import StatefulComponent from './StatefulComponent';
+export { StatefulComponent };
 declare const _default: {
-    AsyncComponent: typeof AsyncComponent;
+    StatefulComponent: typeof StatefulComponent;
 };
 export default _default;

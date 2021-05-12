@@ -1,4 +1,4 @@
-import AsyncComponent from './AsyncComponent'
+import StatefulComponent from './StatefulComponent'
 
-export { AsyncComponent }
-export default { AsyncComponent }
+export { StatefulComponent }
+export default { StatefulComponent }

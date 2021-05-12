@@ -1,5 +1,5 @@
 {
-  "name": "react-components-library-template",
+  "name": "react-stateful-component",
   "files": [
     "dist/**/*"
   ],
@@ -11,7 +11,7 @@
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "version": "0.2.0",
-  "description": "A template repository for developing a React component library.",
+  "description": "A component that asynchronously updates.",
   "author": "C. Lewis",
   "license": "MIT",
   "private": false,

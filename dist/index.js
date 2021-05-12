@@ -1,1 +1,1 @@
-exports.AsyncComponent = require('./AsyncComponent/index.js')
+exports.StatefulComponent = require('./StatefulComponent/index.js')
