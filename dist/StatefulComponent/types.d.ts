@@ -9,7 +9,6 @@ export interface AsyncStateMetadata<T> {
 export declare type AsyncState<T> = T & AsyncStateMetadata<T>;
 export declare type AsyncSetState<T> = Dispatch<SetStateAction<AsyncState<T>>>;
 export declare type StatefulComponentProps<T, K> = AsyncUpdate<T> & K;
-export declare type UseAsyncContextHook<T> = () => AsyncState<T>;
 export declare type UpdatedState<T> = AsyncState<T>;
 export declare type UpdateStateHook<T> = (stateUpdates: Partial<T>) => void;
 /**

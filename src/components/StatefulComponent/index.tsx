@@ -54,30 +54,3 @@ export default class StatefulComponent<T = any, K = {}> extends Component<Statef
     this.active = false;
   }
 }
-/**
- * Consume the `context` from a Provider of that context up the render tree.
- */
- export const StatefulConsumer = <T,>({
-  children,
-  context
-}: StatefulConsumerProps<T>) => (
-  <context.Consumer>{children}</context.Consumer>
-);
-/**
- * The `AsyncProvider` makes a given `Context` available to components beneath
- * it in the render tree, and re-renders when the `Context` changes, which is
- * detected automatically.
- */
-export class StatefulProvider<T> extends StatefulComponent<T, StatefulProviderProps<T>> {
-  /**
-   * Render the Provider and load it with the current state.
-   */
-  render() {
-    const { context, children } = this.props;
-    return (
-      <context.Provider value={this.state}>
-        {children}
-      </context.Provider>
-    );
-  }
-}
