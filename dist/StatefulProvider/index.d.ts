@@ -1,5 +1,5 @@
 /// <reference types="react" />
-import { StatefulProviderProps } from "../StatefulComponent/types";
+import { StatefulProviderProps } from "../types";
 import StatefulComponent from '../StatefulComponent';
 /**
  * The `AsyncProvider` makes a given `Context` available to components beneath

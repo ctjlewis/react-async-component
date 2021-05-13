@@ -4,3 +4,4 @@ import StatefulProvider from './StatefulProvider'
 
 export { StatefulComponent, StatefulConsumer, StatefulProvider }
 export default { StatefulComponent, StatefulConsumer, StatefulProvider }
+export * from './types'

@@ -6,7 +6,7 @@
  * according to some `updateState` function until it reaches a final state.
  */
 import { Component } from "react";
-import { StatefulComponentProps, AsyncState } from "./types";
+import { StatefulComponentProps, AsyncState } from "../types";
 export default class StatefulComponent<T = any, K = {}> extends Component<StatefulComponentProps<T, K>> {
     active: boolean;
     /**

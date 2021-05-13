@@ -1,4 +1,4 @@
-import { StatefulConsumerProps } from '../StatefulComponent/types'
+import { StatefulConsumerProps } from '../types'
 
 /**
  * Consume the `context` from a Provider of that context up the render tree.

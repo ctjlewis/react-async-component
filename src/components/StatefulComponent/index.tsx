@@ -7,7 +7,7 @@
  */
 
 import { Component } from "react";
-import { StatefulComponentProps, StatefulConsumerProps, StatefulProviderProps, AsyncState } from "./types";
+import { StatefulComponentProps, StatefulConsumerProps, StatefulProviderProps, AsyncState } from "../types";
 
 export default class StatefulComponent<T = any, K = {}> extends Component<StatefulComponentProps<T,K>> {
   active = true;

@@ -3,7 +3,7 @@ import { FC } from 'react';
 
 import TestComponentDev from '../../components/StatefulComponent';
 import TestComponentProd from '../../../dist/StatefulComponent';
-import { AsyncState } from '../../components/StatefulComponent/types';
+import { AsyncState } from '../../components/types';
 
 const Row: FC = ({ children, ...props }) => {
   return (

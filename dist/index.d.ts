@@ -5,7 +5,8 @@ import StatefulProvider from './StatefulProvider';
 export { StatefulComponent, StatefulConsumer, StatefulProvider };
 declare const _default: {
     StatefulComponent: typeof StatefulComponent;
-    StatefulConsumer: <T>({ children, context }: import("./StatefulComponent/types").StatefulConsumerProps<T>) => JSX.Element;
+    StatefulConsumer: <T>({ children, context }: import("./types").StatefulConsumerProps<T>) => JSX.Element;
     StatefulProvider: typeof StatefulProvider;
 };
 export default _default;
+export * from './types';

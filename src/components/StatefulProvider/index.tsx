@@ -1,4 +1,4 @@
-import { StatefulProviderProps } from "../StatefulComponent/types";
+import { StatefulProviderProps } from "../types";
 import StatefulComponent from '../StatefulComponent'
 
 /**
