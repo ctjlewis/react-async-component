@@ -30,7 +30,6 @@ const ChangeNumber: FC<ChangeNumberProps<CountState>> = ({ initialState, operati
         <button
           className="rounded-lg m-4 border-2 p-2"
           onClick={() => {
-            console.log(operation(count));
             transition({ count: operation(count) });
           }}
         >
