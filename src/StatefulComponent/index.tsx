@@ -5,7 +5,11 @@
  * The `StatefulComponent` is initialized with an `initialState` and refreshes
  * according to some `updateState` function until it reaches a `null` state.
  */
-import { AsyncState, StatefulComponentProps } from '../types';
+import {
+  StateTransition,
+  StateTransitionTarget,
+  StatefulComponentProps,
+} from '../types';
 import { useEffect, useState } from 'react';
 /**
  * Create a state machine. The state is initialized with the `initialState`,
@@ -13,73 +17,63 @@ import { useEffect, useState } from 'react';
  */
 export const StatefulComponent = <T,>({
   initialState,
-  updateState,
-  children,
+  next,
+  children: render = () => <></>,
 }: StatefulComponentProps<T>) => {
-  const [state, setState] = useState<AsyncState<T>>({
+  const [state, setState] = useState<StateTransition<T>>({
     ...initialState,
     loading: true,
+    /**
+     * By default, the function will just call setState and note that it is no
+     * longer loading.
+     */
+    transition: (transitionTo: StateTransitionTarget<T>) => {
+      setState({
+        ...state,
+        ...transitionTo,
+        loading: false,
+      });
+
+      return null;
+    },
   });
 
   useEffect(() => {
-    if (updateState) {
+    /**
+     * Define a self-referential update function which triggers a new
+     * render and binds itself to the new state.
+     */
+    const transition = (transitionTo: StateTransitionTarget<T>) => {
+      if (transitionTo) {
+        const nextState: StateTransition<T> = {
+          ...state,
+          ...transitionTo,
+          transition,
+          loading: false,
+        };
+
+        setState(nextState);
+        return nextState;
+      }
+
+      return null;
+    };
+
+    if (next) {
       (async () => {
-        const stateUpdate = await updateState(state);
+        const stateUpdate = await next(state);
         if (stateUpdate !== null) {
-          setState({
+          /**
+           * Trigger the update.
+           */
+          transition({
             ...state,
             ...stateUpdate,
-            loading: false,
           });
         }
       })();
     }
-  }, [state, updateState]);
+  }, [state, next]);
 
-  if (!children) {
-    return <></>;
-  }
-
-  return children(state);
+  return render(state);
 };
-
-// export class StatefulComponent<T = any, K = {}> extends Component<
-//   StatefulComponentProps<T, K>
-// > {
-//   active = true;
-//   /**
-//    * Initialize the state to the initial state, loading: true, and set the
-//    * render callback.
-//    */
-//   state: AsyncState<T> = {
-//     ...this.props.initialState,
-//     loading: true,
-//   };
-//   /**
-//    * A method that renders a component as a function of state.
-//    */
-//   render() {
-//     const { render, updateState } = this.props;
-
-//     if (!render) {
-//       return <></>;
-//     }
-
-//     if (this.active && updateState) {
-//       (async () => {
-//         const stateUpdate = await updateState(this.state);
-//         if (stateUpdate) {
-//           this.setState(stateUpdate);
-//         }
-//       })();
-//     }
-
-//     return render(this.state);
-//   }
-//   /**
-//    * Mark unmounted components as inactive (do not update).
-//    */
-//   componentWillUnmount() {
-//     this.active = false;
-//   }
-// }
