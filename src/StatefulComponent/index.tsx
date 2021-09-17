@@ -3,17 +3,19 @@
  * @see https://gist.github.com/bodokaiser/a6377f5cecf6344cd131dce97694a2ad
  *
  * The `StatefulComponent` is initialized with an `initialState` and refreshes
- * according to some `updateState` function until it reaches a final state.
+ * according to some `updateState` function until it reaches a `null` state.
  */
-
-import { AsyncState, StatefulComponentProps } from '../types';
+import { AsyncState, AsyncUpdate } from '../types';
 import { useEffect, useState } from 'react';
-
-export const StatefulComponent = <T, K>({
+/**
+ * Create a state machine. The state is initialized with the `initialState`,
+ * then updated as a function of `updateState` until it reaches a `null` state.
+ */
+export const StatefulComponent = <T,>({
   initialState,
   updateState,
   children,
-}: StatefulComponentProps<T, K>) => {
+}: AsyncUpdate<T>) => {
   const [state, setState] = useState<AsyncState<T>>({
     ...initialState,
     loading: true,

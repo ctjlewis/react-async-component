@@ -1,40 +1,30 @@
-import {
-  Context,
-  Dispatch,
-  ReactElement,
-  ReactNode,
-  SetStateAction,
-} from 'react';
+import { Context, ReactElement, ReactNode } from 'react';
 
 /**
  * Metadata added to async component state.
  */
 export interface AsyncStateMetadata {
   loading: boolean;
-  // updateState: UpdateStateHook<T>
 }
+/**
+ * The state with some metadata related to loading status.
+ */
 export type AsyncState<T> = T & AsyncStateMetadata;
-export type AsyncSetState<T> = Dispatch<SetStateAction<AsyncState<T>>>;
-
-export type StatefulComponentProps<T, K> = AsyncUpdate<T> & K;
-// export type UpdatedState<T> = AsyncState<T>;
-
+/**
+ * The updated state returned from `updateState`.
+ */
 export type UpdatedState<T> = Partial<T> | null;
+/**
+ * A Promise which resolves to an `UpdatedState`.
+ */
 export type UpdatedStatePromise<T> = Promise<UpdatedState<T>>;
+/**
+ * A function which returns an updated version of the state, or `null`.
+ */
 export type UpdateStateHook<T> = (
   stateUpdate: AsyncState<T>,
 ) => UpdatedState<T> | UpdatedStatePromise<T>;
 
-/**
- * The state update function `updateState` is called with the current state as
- * an argument in order to allow for conditional logic, and should resolve to an
- * object containing state values to update. The `initialState` should be a
- * complete state object containing values for all required fields.
- */
-export type StateUpdate<T> = (
-  state: AsyncState<T>,
-) => AsyncState<Partial<T>> | Promise<AsyncState<Partial<T>>> | null;
-// export type StateUpdate<T> = (state: T) => Partial<T> | Promise<Partial<T>>;
 /**
  * The `AsyncStateMachine` accepts an initial state and a function to update the
  * state asynchronously.

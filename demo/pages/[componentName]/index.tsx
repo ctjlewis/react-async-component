@@ -1,7 +1,4 @@
-// import { useRouter } from 'next/router'
 import { FC } from 'react';
-
-// import { StatefulComponent } from '../../../dist/StatefulComponent';
 import { StatefulComponent } from '../../../dist/StatefulComponent';
 
 const Centered: FC = ({ children }) => {
@@ -13,25 +10,6 @@ const Centered: FC = ({ children }) => {
 }
 
 const ComponentDemo = () => {
-  type State = { count: number };
-
-  const updateState = async ({ count }: State) => {
-    /**
-     * Mutate the state.
-     */
-    count += 1;
-    /**
-     * If count < 4, trigger the update.
-     */
-    if (count < 4) {
-      return {
-        count,
-      };
-    }
-
-    return null;
-  };
-
   return (
     <Centered>
       <div className="w-full text-center">
