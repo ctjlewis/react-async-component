@@ -3,9 +3,9 @@ import { PropsWithChildren } from 'react';
 import { StatefulComponent } from '../StatefulComponent';
 
 /**
- * The `AsyncProvider` makes a given `Context` available to components beneath
- * it in the render tree, and re-renders when the `Context` changes, which is
- * detected automatically.
+ * The `StatefulProvider` makes a given `Context` available to components
+ * beneath it in the render tree, and re-renders when the `Context` changes,
+ * which is detected automatically.
  */
 export function StatefulProvider<T>({
   context,
