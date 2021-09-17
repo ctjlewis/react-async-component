@@ -20,7 +20,7 @@ export type UpdateStateHook<T> = (stateUpdates: Partial<T>) => void;
  * object containing state values to update. The `initialState` should be a
  * complete state object containing values for all required fields.
  */
-export type StateUpdate<T> = (state: AsyncState<T>) => boolean | Promise<boolean>;
+export type StateUpdate<T> = (state: AsyncState<T>) => Partial<T> | Promise<Partial<T>> | null;
 // export type StateUpdate<T> = (state: T) => Partial<T> | Promise<Partial<T>>;
 /**
  * The `AsyncStateMachine` accepts an initial state and a function to update the
@@ -33,9 +33,9 @@ export interface AsyncUpdate<T = any> {
    */
   initialState: T
   /**
-   * A function which provides state updates. Values will be merged into the
-   * state object in the form `setState({ ...state, ...updates })`, i.e., values
-   * which are not updated will remain unchanged.
+   * A function which provides state updates. Values will be shallow-merged into
+   * the state by React's `setState`. If the function returns `null`, the state
+   * will stop updating.
    */
   updateState?: StateUpdate<T>
   /**

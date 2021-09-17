@@ -9,7 +9,7 @@
 import { Component } from "react";
 import { StatefulComponentProps, AsyncState } from "../types";
 
-export class StatefulComponent<T = any, K = {}> extends Component<StatefulComponentProps<T,K>> {
+export class StatefulComponent<T = any, K = {}> extends Component<StatefulComponentProps<T, K>> {
   active = true;
   /**
    * Initialize the state to the initial state, loading: true, and set the
@@ -27,28 +27,29 @@ export class StatefulComponent<T = any, K = {}> extends Component<StatefulCompon
       }
     },
   }
+  /**
+   * A method that renders a component as a function of state.
+   */
   render() {
-    const { render } = this.props;
+    const { render, updateState } = this.props;
+
     if (!render) {
       return (<></>);
     };
+
+    if (this.active && updateState) {
+      (async () => {
+        const stateUpdate = await updateState(this.state);
+        if (stateUpdate) {
+          this.setState(stateUpdate);
+        }
+      })();
+    }
+
     return render(this.state);
   }
   /**
-   * If the component is active and we have a state update, await it, then
-   * re-render with the new state.
-   */
-  async componentDidMount() {
-    const { updateState } = this.props;
-    if (this.active && updateState) {
-      const runAgain = await updateState(this.state);
-      if (runAgain) {
-        await this.componentDidMount();
-      }
-    }
-  }
-  /**
-   * Do not schedule updates after the component has been unmounted.
+   * Mark unmounted components as inactive (do not update).
    */
   componentWillUnmount() {
     this.active = false;
