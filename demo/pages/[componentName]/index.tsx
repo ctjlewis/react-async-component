@@ -2,7 +2,7 @@
 import { FC } from 'react';
 
 // import { StatefulComponent } from '../../../dist/StatefulComponent';
-import { StatefulComponentTest as StatefulComponent } from '../../../dist/StatefulComponent';
+import { StatefulComponent } from '../../../dist/StatefulComponent';
 
 const Centered: FC = ({ children }) => {
   return (
@@ -14,7 +14,6 @@ const Centered: FC = ({ children }) => {
 
 const ComponentDemo = () => {
   type State = { count: number };
-  const initialState = { count: 0 };
 
   const updateState = async ({ count }: State) => {
     /**
@@ -33,21 +32,18 @@ const ComponentDemo = () => {
     return null;
   };
 
-  const displayCount = (state: State) => {
-    return (
-      <p>State.count: <strong>{state.count}</strong></p>
-    );
-  }
-
   return (
     <Centered>
       <div className="w-full text-center">
-        <h3><code>StatefulComponent</code></h3>
-        <StatefulComponent
-          initialState={initialState}
-          updateState={updateState}
-          render={displayCount}
-        />
+        <div>
+          <h3><code>StatefulComponent</code></h3>
+          <StatefulComponent
+            initialState={{ count: 0 }}
+            updateState={({ count }) => (count <= 4 ? { count: count + 1 } : null)}
+          >
+            {({ count }) => <p>Count: <strong>{count}</strong></p>}
+          </StatefulComponent>
+        </div>
       </div>
     </Centered>
   );

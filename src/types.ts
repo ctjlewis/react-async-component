@@ -21,11 +21,9 @@ export type StatefulComponentProps<T, K> = AsyncUpdate<T> & K;
 
 export type UpdatedState<T> = Partial<T> | null;
 export type UpdatedStatePromise<T> = Promise<UpdatedState<T>>;
-export type UpdateStateProp<T> = (
+export type UpdateStateHook<T> = (
   stateUpdate: AsyncState<T>,
 ) => UpdatedState<T> | UpdatedStatePromise<T>;
-
-export type UpdateStateHook<T> = (stateUpdate: AsyncState<T>) => void;
 
 /**
  * The state update function `updateState` is called with the current state as
@@ -52,11 +50,11 @@ export interface AsyncUpdate<T = any> {
    * the state by React's `setState`. If the function returns `null`, the state
    * will stop updating.
    */
-  updateState?: UpdateStateProp<T>;
+  updateState?: UpdateStateHook<T>;
   /**
    * Generate a component from the state.
    */
-  render?: (state: AsyncState<T>) => ReactElement;
+  children?: (state: AsyncState<T>) => ReactElement;
 }
 /**
  * `AsyncProvider` requires a `context` to read, and a `updateState` function

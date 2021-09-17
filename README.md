@@ -1,30 +1,30 @@
 # Stateful Component
+Define a component as a state machine.
 
-This library exports a `StatefulComponent` which can be used to asynchronously
-`await` some update and then refresh again, any number of times, until reaching
-some final state.
+## Parameters
 
+### `initialState: State`
+The initial state to use.
+
+### `updateState: (State) => State | null`
+Accepts state as an argument, returns a modified form or `null` (to stop transition).
+
+### Children: `(State) => ReactElement`
+Renders a component as a function of state.
+
+## Example
 ```tsx
-const ComponentDemo = () => {
-  type State = { count: number }
-  const updateState = async ({ count, updateState }: AsyncState<State>) => {
-    /**
-     * Trigger a state update.
-     */
-    count += 1;
-    updateState({ count });
-    /**
-     * Indicate whether or not to transition to the next state.
-     */
-    return count < 4;
-  };
-
-  return (
-    <StatefulComponent
-      initialState={{ count: 0 }}
-      updateState={updateState}
-      render={({ count }: State) => <h3>State.count: {count}</h3>}
-    />
-  );
-};
+/**
+ * This component transitions from { count: 0 } to { count: 5 }.
+ */
+<StatefulComponent
+  initialState={{ count: 0 }}
+  updateState={
+    async ({ count }) => (
+      count <= 4 ? { count: count + 1 } : null
+    )
+  }
+>
+  {({ count }) => <p>Count: <strong>{count}</strong></p>}
+</StatefulComponent>
 ```
