@@ -40,8 +40,10 @@ export interface AsyncUpdate<T = any> {
    * will stop updating.
    */
   updateState?: UpdateStateHook<T>;
-  /**
-   * Generate a component from the state.
-   */
+}
+/**
+ * Generate a component from the state.
+ */
+export interface StatefulComponentProps<T> extends AsyncUpdate<T> {
   children?: (state: AsyncState<T>) => ReactElement;
 }

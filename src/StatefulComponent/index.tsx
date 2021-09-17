@@ -5,7 +5,7 @@
  * The `StatefulComponent` is initialized with an `initialState` and refreshes
  * according to some `updateState` function until it reaches a `null` state.
  */
-import { AsyncState, AsyncUpdate } from '../types';
+import { AsyncState, StatefulComponentProps } from '../types';
 import { useEffect, useState } from 'react';
 /**
  * Create a state machine. The state is initialized with the `initialState`,
@@ -15,7 +15,7 @@ export const StatefulComponent = <T,>({
   initialState,
   updateState,
   children,
-}: AsyncUpdate<T>) => {
+}: StatefulComponentProps<T>) => {
   const [state, setState] = useState<AsyncState<T>>({
     ...initialState,
     loading: true,
