@@ -1,4 +1,4 @@
-import { Context, ReactElement, ReactNode } from 'react';
+import { ReactElement } from 'react';
 
 /**
  * Metadata added to async component state.
@@ -24,7 +24,6 @@ export type UpdatedStatePromise<T> = Promise<UpdatedState<T>>;
 export type UpdateStateHook<T> = (
   stateUpdate: AsyncState<T>,
 ) => UpdatedState<T> | UpdatedStatePromise<T>;
-
 /**
  * The `AsyncStateMachine` accepts an initial state and a function to update the
  * state asynchronously.
@@ -45,18 +44,4 @@ export interface AsyncUpdate<T = any> {
    * Generate a component from the state.
    */
   children?: (state: AsyncState<T>) => ReactElement;
-}
-/**
- * `AsyncProvider` requires a `context` to read, and a `updateState` function
- * to generate a new state when the context changes.
- */
-export interface StatefulProviderProps<T> extends AsyncUpdate<T> {
-  context: Context<AsyncState<T>>;
-}
-/**
- * `AsyncConsumer` requires a `context` to read.
- */
-export interface StatefulConsumerProps<T> {
-  children: (value: T) => ReactNode;
-  context: Context<T>;
 }
