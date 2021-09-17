@@ -29,7 +29,7 @@ export type StateTransition<T> = T & StateTransitionMetadata<T>;
  * The `AsyncStateMachine` accepts an initial state and a function to update the
  * state asynchronously.
  */
-export interface AsyncUpdate<T> {
+export interface StateMachine<T> {
   /**
    * The complete default state to initialize. If no `updateState` is provided,
    * the state will only update when manually updated.
@@ -45,6 +45,6 @@ export interface AsyncUpdate<T> {
 /**
  * Generate a component from the state.
  */
-export interface StatefulComponentProps<T> extends AsyncUpdate<T> {
+export interface StatefulComponentProps<T> extends StateMachine<T> {
   children?: (state: StateTransition<T>) => ReactElement;
 }
