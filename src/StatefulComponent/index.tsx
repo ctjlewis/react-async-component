@@ -6,10 +6,44 @@
  * according to some `updateState` function until it reaches a final state.
  */
 
-import { Component } from "react";
-import { StatefulComponentProps, AsyncState } from "../types";
+import { AsyncState, StatefulComponentProps } from '../types';
+import { Component, useEffect, useState } from 'react';
 
-export class StatefulComponent<T = any, K = {}> extends Component<StatefulComponentProps<T, K>> {
+export const StatefulComponentTest = <T, K>({
+  initialState,
+  updateState,
+  render,
+}: StatefulComponentProps<T, K>) => {
+  const [state, setState] = useState<AsyncState<T>>({
+    ...initialState,
+    loading: true,
+  });
+
+  useEffect(() => {
+    if (updateState) {
+      (async () => {
+        const stateUpdate = await updateState(state);
+        if (stateUpdate !== null) {
+          setState({
+            ...state,
+            ...stateUpdate,
+            loading: false,
+          });
+        }
+      })();
+    }
+  }, [state, updateState]);
+
+  if (!render) {
+    return <></>;
+  }
+
+  return render(state);
+};
+
+export class StatefulComponent<T = any, K = {}> extends Component<
+  StatefulComponentProps<T, K>
+> {
   active = true;
   /**
    * Initialize the state to the initial state, loading: true, and set the
@@ -18,15 +52,7 @@ export class StatefulComponent<T = any, K = {}> extends Component<StatefulCompon
   state: AsyncState<T> = {
     ...this.props.initialState,
     loading: true,
-    updateState: (update) => {
-      if (this.active) {
-        this.setState({
-          ...update,
-          loading: false
-        });
-      }
-    },
-  }
+  };
   /**
    * A method that renders a component as a function of state.
    */
@@ -34,8 +60,8 @@ export class StatefulComponent<T = any, K = {}> extends Component<StatefulCompon
     const { render, updateState } = this.props;
 
     if (!render) {
-      return (<></>);
-    };
+      return <></>;
+    }
 
     if (this.active && updateState) {
       (async () => {
