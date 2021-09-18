@@ -29,11 +29,11 @@ Renders a component as a function of state.
  * This component increases as you press a button.
  */
 <StatefulComponent initialState={{ count: 0 }}>
-  {({ count, transition }) => (
+  {({ count, updateState }) => (
     <div>
       <button
         className="rounded-lg m-4 border-2 p-2"
-        onClick={() => transition({ count: count + 1 })}
+        onClick={() => updateState({ count: count + 1 })}
       >
         Click me
       </button>
