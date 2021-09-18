@@ -21,16 +21,16 @@ interface ChangeNumberProps<T> extends StatefulComponentProps<T>{
 const ChangeNumber: FC<ChangeNumberProps<CountState>> = ({ initialState, operation }) => (
   <StatefulComponent
     initialState={initialState}
-    // next={
+    // nextState={
     //   ({ count }) => count <= 4 ? { count: count + 1 } : null
     // }
   >
-    {({ count, transition }) => (
+    {({ count, updateState }) => (
       <div>
         <button
           className="rounded-lg m-4 border-2 p-2"
           onClick={() => {
-            transition({ count: operation(count) });
+            updateState({ count: operation(count) });
           }}
         >
           Click me

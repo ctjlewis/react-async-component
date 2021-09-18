@@ -14,12 +14,17 @@ export type StateTransitionPromise<T> = Promise<StateTransitionTarget<T>>;
 export type StateTransitionHook<T> = (
   stateUpdate: StateTransition<T>,
 ) => StateTransitionTarget<T> | StateTransitionPromise<T>;
+/**
+ * A hook which accepts a transition target as an argument and resolves to the
+ * state or null.
+ */
+export type StateUpdateHook<T> = (state: StateTransitionTarget<T>) => T | null;
 /*
  * Metadata added to async component state.
  */
 export interface StateTransitionMetadata<T> {
   loading: boolean;
-  transition: (state: StateTransitionTarget<T>) => T | null;
+  updateState: StateUpdateHook<T>;
 }
 /**
  * The state with some metadata related to loading status.
@@ -40,7 +45,7 @@ export interface StateMachine<T> {
    * the state by React's `setState`. If the function returns `null`, the state
    * will stop updating.
    */
-  next?: StateTransitionHook<T>;
+  nextState?: StateTransitionHook<T>;
 }
 /**
  * Generate a component from the state.
