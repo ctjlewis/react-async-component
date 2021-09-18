@@ -10,6 +10,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@tszip/tszip": "^1.11.0",
     "next": "11.1.2"
   },
   "devDependencies": {

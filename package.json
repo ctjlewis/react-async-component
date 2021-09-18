@@ -16,7 +16,7 @@
     "bootstrap": "yarn boot && yarn build",
     "client": "yarn --cwd demo",
     "dev": "tszip dev",
-    "build": "yarn tszip build",
+    "build": "tszip build",
     "test": "tszip test",
     "test:watch": "tszip test --watch",
     "test:coverage": "tszip test --coverage",
