@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "link-react": " yarn --cwd .. && npm link ../node_modules/react ../node_modules/react-dom",
+    "link-react": "yarn --cwd .. install && npm link ../node_modules/react ../node_modules/react-dom",
     "predev": "yarn link-react",
     "dev": "next dev",
     "prebuild": "yarn --cwd .. build",
@@ -12,7 +12,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@tszip/tszip": "^1.11.0",
     "next": "11.1.2"
   },
   "devDependencies": {
