@@ -20,6 +20,20 @@ export const StatefulComponent = <T,>({
   next,
   children: render = () => <></>,
 }: StatefulComponentProps<T>) => {
+  /**
+   * By default, the function will just call setState and note that it is no
+   * longer loading.
+   */
+  const transition = (transitionTo: StateTransitionTarget<T>) => {
+    setState({
+      ...state,
+      ...transitionTo,
+      transition,
+      loading: false,
+    });
+
+    return null;
+  };
   const [state, setState] = useState<StateTransition<T>>({
     ...initialState,
     loading: true,
@@ -27,15 +41,7 @@ export const StatefulComponent = <T,>({
      * By default, the function will just call setState and note that it is no
      * longer loading.
      */
-    transition: (transitionTo: StateTransitionTarget<T>) => {
-      setState({
-        ...state,
-        ...transitionTo,
-        loading: false,
-      });
-
-      return null;
-    },
+    transition,
   });
 
   useEffect(() => {
