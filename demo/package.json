@@ -3,10 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "link-react": "yarn --cwd .. install && npm link ../node_modules/react ../node_modules/react-dom",
-    "predev": "yarn link-react",
+    "link-react": "yarn --cwd ../node_modules/react link && yarn link react",
+    "link-react-dom": "yarn --cwd ../node_modules/react-dom link && yarn link react-dom",
+    "link-pkgs": "yarn link-react && yarn link-react-dom",
+    "predev": "yarn link-pkgs",
     "dev": "next dev",
-    "prebuild": "yarn --cwd .. build",
+    "prebuild": "yarn --cwd .. build && yarn link-pkgs",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
