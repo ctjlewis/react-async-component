@@ -6,7 +6,7 @@
 
 https://stateful-component.vercel.app/
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fctjlewis%2Fstateful-component&demo-title=Stateful%20Component&demo-description=A%20stateful%20component%20demo.&demo-url=https%3A%2F%2Fstateful-component.vercel.app%2F)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fctjlewis%2Fstateful-component&demo-title=Stateful%20Component%20Demo&demo-description=A%20demo%20of%20several%20state%20machines.&demo-url=https%3A%2F%2Fstateful-component.vercel.app%2F&demo-image=https%3A%2F%2Fi.imgur.com%2Fc7dJ6AU.png)
 
 ## Parameters
 
