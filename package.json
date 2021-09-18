@@ -14,6 +14,7 @@
     "preboot": "yarn clean",
     "boot": "tsc && rollup -c --silent",
     "bootstrap": "yarn boot && yarn build",
+    "preclient": "yarn --cwd demo/node_modules/next link && yarn link next",
     "client": "yarn --cwd demo",
     "dev": "tszip dev",
     "build": "tszip build",
