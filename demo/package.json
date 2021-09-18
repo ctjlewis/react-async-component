@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "link-react": "npm link ../node_modules/react ../node_modules/react-dom",
+    "link-react": " yarn --cwd .. && npm link ../node_modules/react ../node_modules/react-dom",
     "predev": "yarn link-react",
     "dev": "next dev",
-    "prebuild": "yarn link-react && yarn --cwd .. && yarn --cwd .. build",
+    "prebuild": "yarn --cwd .. build",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
