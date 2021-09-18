@@ -15,16 +15,19 @@ Renders a component as a function of state.
 ## Example
 ```tsx
 /**
- * This component transitions from { count: 0 } to { count: 5 }.
+ * This component increases as you press a button.
  */
-<StatefulComponent
-  initialState={{ count: 0 }}
-  updateState={
-    async ({ count }) => (
-      count <= 4 ? { count: count + 1 } : null
-    )
-  }
->
-  {({ count }) => <p>Count: <strong>{count}</strong></p>}
+<StatefulComponent initialState={{ count: 0 }}>
+  {({ count, transition }) => (
+    <div>
+      <button
+        className="rounded-lg m-4 border-2 p-2"
+        onClick={() => transition({ count: count + 1 })}
+      >
+        Click me
+      </button>
+      <p>Count: <strong>{count}</strong></p>
+    </div>
+  )}
 </StatefulComponent>
 ```
