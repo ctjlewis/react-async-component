@@ -1,18 +1,29 @@
 # Stateful Component
-Define a component as a state machine.
+
+*Define components as pure state machines.*
+
+### Demo
+
+https://stateful-component.vercel.app/
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fctjlewis%2Fstateful-component&demo-title=Stateful%20Component&demo-description=A%20stateful%20component%20demo.&demo-url=https%3A%2F%2Fstateful-component.vercel.app%2F)
 
 ## Parameters
 
 ### `initialState: State`
+
 The initial state to use.
 
 ### `updateState: (State) => State | null`
+
 Accepts state as an argument, returns a modified form or `null` (to stop transition).
 
 ### Children: `(State) => ReactElement`
+
 Renders a component as a function of state.
 
 ## Example
+
 ```tsx
 /**
  * This component increases as you press a button.
@@ -26,7 +37,9 @@ Renders a component as a function of state.
       >
         Click me
       </button>
-      <p>Count: <strong>{count}</strong></p>
+      <p>
+        Count: <strong>{count}</strong>
+      </p>
     </div>
   )}
 </StatefulComponent>
